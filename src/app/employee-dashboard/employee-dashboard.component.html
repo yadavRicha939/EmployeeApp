@@ -1,0 +1,141 @@
+<h1 *ngIf="isAddMode">Add Empolyee</h1>
+<h1 *ngIf="!isAddMode">Edit Empolyee</h1>
+
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <a class="navbar-brand" href="#">Employee Dashboard</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="form-inline my-2 my-lg-0">
+        <button class="btn btn-success my-2 my-sm-0" type="submit" (click)="openaddEmployeeModal()" data-toggle="modal"
+          data-target="#addEmployee">Add Employee</button>
+      </div>
+    </div>
+  </nav>
+
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Sr.No.</th>
+        <th>First Name</th>
+        <!-- <th>Last Name</th> -->
+        <th>Email</th>
+        <th>EmployeeId</th>
+        <th>Mobile Number</th>
+        <th>Gender</th>
+        <th>Age</th>
+        <th>Another Phone Number</th>
+        <th>Action</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr  *ngFor="let emp of empDetail;index as i">
+        <td scope ="row">{{i+1}}</td>
+        <td>{{firstName}}</td>
+        <!-- <td>{{empDetail.lastName}}</td> -->
+        <!-- <td>{{lastName}}</td> -->
+        <td>{{email}}</td>
+        <td>{{employeeId}}</td>
+        <td>{{mobile}}</td>
+        <td>{{gender}}</td>
+        <td>{{age}}</td>
+        <td>{{altMobile}}</td>
+        <td>
+          <input type="button" value="Edit" data-toggle="modal" data-target="#addEmployee" class="btn btn-success mr-2"
+            (click)="openaddEmployeeModal()" />
+          <input type="button" value="Delete" class="btn btn-danger" (click)="onDelete(i)"/>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+                                                   <!-- Open Add Employee Model -->
+
+<div class="modal fade" id="addEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ADD EMPLOYEE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="container">
+          <form formGroup="empDetail">
+            <!--  #f="ngForm" [formGroup]="empDetail" -->
+            <div class="form-row">
+
+              <div class="form-group col-md-6">
+                <label for="firstName">First Name</label>
+                <input type="text" fromControlName="firstName" class="form-control"  placeholder=" First Name" #firstName [ngModelOptions]="{standalone: true}" ngModel/>
+              </div>
+
+              <!-- <div class="form-group col-md-6">
+                <label for="lastname">Last Name</label>
+                <input type="text" fromControlName="lastname" class="form-control"  placeholder="Last Name" #lastname [ngModelOptions]="{standalone: true}" ngModel/>
+              </div> -->
+
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Email</label>
+                <input type="email"  fromControlName="email" class="form-control" placeholder="Email" #email [ngModelOptions]="{standalone: true}" ngModel/>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="employeeId">EmployeeId</label>
+                <input type="text" fromControlName="employeeId"  class="form-control"  placeholder="EmployeeId" #employeeId [ngModelOptions]="{standalone: true}" ngModel/>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="mobile">Mobile No.</label>
+                <input type="number"  fromControlName="mobile"  class="form-control" placeholder="Mobile No."  #mobile [ngModelOptions]="{standalone: true}" ngModel/>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="gender">Gender</label>
+                <select class="form-control"  fromControlName="gender" id="gender" #gender>
+                  <option selected>Gender</option>
+                  <option value="1">Female</option>
+                  <option value="2">Male</option>
+                  <option value="3">Others</option>
+                </select>
+              </div>
+
+
+              <div class="form-group col-md-6">
+                <label for="age">Age</label>
+                <input type="number"  formGroupName="age"  class="form-control"  placeholder="Age" #age [ngModelOptions]="{standalone: true}" ngModel/>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="mobile2">Alt Mobile No.</label>
+                <input type="number"  formGroupName="altMobile" class="form-control"  placeholder="Mobile No." #altMobile [ngModelOptions]="{standalone: true}" ngModel/>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-primary" (click)="onAddEmployee(firstName,employeeId,mobile,gender,age,altMobile)">Submit</button>
+        <button type="button" class="btn btn-cancel" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
